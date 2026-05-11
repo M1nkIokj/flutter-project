@@ -4,6 +4,7 @@ import '../../bloc/auth_bloc.dart';
 import '../../bloc/auth_event.dart';
 import '../../bloc/auth_state.dart';
 import '../auth/login_page.dart';
+import '../pokemon_game/pokemon_game_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -12,13 +13,12 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Main Page'),
+        title: const Text('Pokemon Game'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               context.read<AuthBloc>().add(SignOutRequested());
-              Navigator.pop(context);
             },
           ),
         ],
@@ -35,74 +35,47 @@ class MainPage extends StatelessWidget {
         builder: (context, state) {
           if (state is Authenticated) {
             return Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(
-                    Icons.home,
-                    size: 100,
-                    color: Colors.blue,
+                    Icons.catching_pokemon,
+                    size: 80,
+                    color: Colors.red,
                   ),
-                  const SizedBox(height: 32),
-                  const Text(
-                    'Welcome!',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   Text(
-                    'Logged in as ${state.user.email}',
+                    'Hi, ${state.user.name}',
                     style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'User: ${state.user.name}',
+                    state.user.email,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 48),
-                  const Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Dashboard',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PokemonGamePage(),
                           ),
-                          SizedBox(height: 16),
-                          Text(
-                            'This is your main dashboard after successful login.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(SignOutRequested());
-                    },
-                    icon: const Icon(Icons.logout),
-                    label: const Text('Sign Out'),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
+                        );
+                      },
+                      icon: const Icon(Icons.play_arrow),
+                      label: const Text('Play Game'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                     ),
                   ),
