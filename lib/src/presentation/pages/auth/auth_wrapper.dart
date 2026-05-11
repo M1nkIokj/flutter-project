@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/auth_bloc.dart';
-import '../bloc/auth_event.dart';
-import '../bloc/auth_state.dart';
+import '../../bloc/auth_bloc.dart';
+import '../../bloc/auth_event.dart';
+import '../../bloc/auth_state.dart';
 import 'login_page.dart';
-import 'main_page.dart';
+import '../main/main_page.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});

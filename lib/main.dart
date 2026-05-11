@@ -4,7 +4,7 @@ import 'src/core/di/service_locator.dart';
 import 'src/core/services/supabase_service.dart';
 import 'src/core/utils/debug_helper.dart';
 import 'src/presentation/bloc/auth_bloc.dart';
-import 'src/presentation/pages/auth_wrapper.dart';
+import 'src/presentation/pages/auth/auth_wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
