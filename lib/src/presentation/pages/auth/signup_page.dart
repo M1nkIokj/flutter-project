@@ -43,6 +43,7 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign Up'),
+        key: const Key('signup_appbar'),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -100,9 +101,11 @@ class _SignupPageState extends State<SignupPage> {
                       Icons.person_add,
                       size: 100,
                       color: Colors.blue,
+                      key: Key('signup_icon'),
                     ),
                     const SizedBox(height: 32),
                     AuthTextField(
+                      key: const Key('signup_name_field'),
                       controller: _nameController,
                       label: 'Name',
                       textCapitalization: TextCapitalization.words,
@@ -121,6 +124,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 16),
                     AuthTextField(
+                      key: const Key('signup_email_field'),
                       controller: _emailController,
                       label: 'Email',
                       keyboardType: TextInputType.emailAddress,
@@ -143,6 +147,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 16),
                     AuthTextField(
+                      key: const Key('signup_password_field'),
                       controller: _passwordController,
                       label: 'Password',
                       obscureText: !_isPasswordVisible,
@@ -153,6 +158,7 @@ class _SignupPageState extends State<SignupPage> {
                         }
                       },
                       suffixIcon: IconButton(
+                        key: const Key('signup_password_visibility_toggle'),
                         icon: Icon(
                           _isPasswordVisible
                               ? Icons.visibility
@@ -176,6 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 16),
                     AuthTextField(
+                      key: const Key('signup_confirm_password_field'),
                       controller: _confirmPasswordController,
                       label: 'Confirm Password',
                       obscureText: !_isConfirmPasswordVisible,
@@ -186,6 +193,8 @@ class _SignupPageState extends State<SignupPage> {
                         }
                       },
                       suffixIcon: IconButton(
+                        key: const Key(
+                            'signup_confirm_password_visibility_toggle'),
                         icon: Icon(
                           _isConfirmPasswordVisible
                               ? Icons.visibility
@@ -210,8 +219,11 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 24),
                     state is AuthLoading
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(
+                            key: Key('signup_loading_indicator'),
+                            child: CircularProgressIndicator())
                         : ElevatedButton(
+                            key: const Key('signup_submit_button'),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 context.read<AuthBloc>().add(
@@ -227,6 +239,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                     const SizedBox(height: 16),
                     TextButton(
+                      key: const Key('signup_login_button'),
                       onPressed: () {
                         _clearForm();
                         Navigator.pop(context);

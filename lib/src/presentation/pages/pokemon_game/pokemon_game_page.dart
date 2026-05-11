@@ -44,7 +44,9 @@ class _PokemonGameViewState extends State<PokemonGameView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokemon Guess Game'),
+        key: const Key('pokemon_game_appbar'),
         leading: IconButton(
+          key: const Key('pokemon_game_back_button'),
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
@@ -62,7 +64,9 @@ class _PokemonGameViewState extends State<PokemonGameView> {
         },
         builder: (context, state) {
           if (state is PokemonGameLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                key: Key('pokemon_game_loading'),
+                child: CircularProgressIndicator());
           } else if (state is PokemonsLoaded) {
             return _GameSetupView(
                 pokemons: state.pokemons, highScores: state.highScores);
@@ -289,6 +293,7 @@ class _GameSetupView extends StatelessWidget {
                 ],
               ),
               child: ElevatedButton(
+                key: const Key('pokemon_game_start_10'),
                 onPressed: () =>
                     context.read<PokemonGameBloc>().add(StartGame(10)),
                 style: ElevatedButton.styleFrom(
@@ -329,6 +334,7 @@ class _GameSetupView extends StatelessWidget {
                 ],
               ),
               child: ElevatedButton(
+                key: const Key('pokemon_game_start_20'),
                 onPressed: () =>
                     context.read<PokemonGameBloc>().add(StartGame(20)),
                 style: ElevatedButton.styleFrom(
@@ -369,6 +375,7 @@ class _GameSetupView extends StatelessWidget {
                 ],
               ),
               child: ElevatedButton(
+                key: const Key('pokemon_game_start_30'),
                 onPressed: () =>
                     context.read<PokemonGameBloc>().add(StartGame(30)),
                 style: ElevatedButton.styleFrom(
@@ -579,6 +586,7 @@ class _GamePlayView extends StatelessWidget {
                           ],
                         ),
                         child: ElevatedButton(
+                          key: Key('pokemon_game_answer_${index}'),
                           onPressed: () => context
                               .read<PokemonGameBloc>()
                               .add(SubmitAnswer(option)),

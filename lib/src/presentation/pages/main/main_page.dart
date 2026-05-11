@@ -14,8 +14,10 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokemon Game'),
+        key: const Key('main_appbar'),
         actions: [
           IconButton(
+            key: const Key('main_logout_button'),
             icon: const Icon(Icons.logout),
             onPressed: () {
               context.read<AuthBloc>().add(SignOutRequested());
@@ -43,10 +45,12 @@ class MainPage extends StatelessWidget {
                     Icons.catching_pokemon,
                     size: 80,
                     color: Colors.red,
+                    key: Key('main_pokemon_icon'),
                   ),
                   const SizedBox(height: 24),
                   Text(
                     'Hi, ${state.user.name}',
+                    key: Key('main_user_name_text'),
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
@@ -55,6 +59,7 @@ class MainPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     state.user.email,
+                    key: Key('main_user_email_text'),
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -64,6 +69,7 @@ class MainPage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
+                      key: const Key('main_play_game_button'),
                       onPressed: () {
                         Navigator.push(
                           context,

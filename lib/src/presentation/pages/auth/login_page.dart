@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
+        key: const Key('login_appbar'),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -76,9 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                       Icons.lock,
                       size: 100,
                       color: Colors.blue,
+                      key: Key('login_icon'),
                     ),
                     const SizedBox(height: 32),
                     AuthTextField(
+                      key: const Key('login_email_field'),
                       controller: _emailController,
                       label: 'Email',
                       keyboardType: TextInputType.emailAddress,
@@ -95,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 16),
                     AuthTextField(
+                      key: const Key('login_password_field'),
                       controller: _passwordController,
                       label: 'Password',
                       obscureText: !_isPasswordVisible,
@@ -103,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                         // Don't validate the entire form as it affects other fields
                       },
                       suffixIcon: IconButton(
+                        key: const Key('login_password_visibility_toggle'),
                         icon: Icon(
                           _isPasswordVisible
                               ? Icons.visibility
@@ -126,8 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 24),
                     state is AuthLoading
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(
+                            key: Key('login_loading_indicator'),
+                            child: CircularProgressIndicator())
                         : ElevatedButton(
+                            key: const Key('login_submit_button'),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 context.read<AuthBloc>().add(
@@ -142,6 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                     const SizedBox(height: 16),
                     TextButton(
+                      key: const Key('login_signup_button'),
                       onPressed: () {
                         _clearForm();
                         Navigator.push(
